@@ -22,7 +22,7 @@ for (let i = 0; i < world.length; i++) {
     }
 }
 
-function eating(x) {
+function eating(x, foxIndex) {
     switch (farm[x].type) {
         case "C":
             farm[x].type = ".";
@@ -38,11 +38,11 @@ function hunt(foxIndex, cellAffiliation) {
     if (cellAffiliation === true) {
         for (let x = (foxIndex - 1);
             (farm[x].type != "[") || (farm[x + 1].type != "X"); x--) {
-            eating(x);
+            eating(x, foxIndex);
         }
         for (let x = (foxIndex + 1);
             (farm[x].type != "]") || (farm[x - 1].type != "X"); x++) {
-            eating(x);
+            eating(x, foxIndex);
         }
     } else {
         for (let x = (foxIndex - 1);
@@ -52,13 +52,13 @@ function hunt(foxIndex, cellAffiliation) {
             console.log(x);
 
             if (farm[x].cell === false) {
-                eating(x);
+                eating(x, foxIndex);
             }
         }
         for (let x = (foxIndex + 1);
             (x < farm.length) || (farm[x + 1].type != "X"); x++) {
             if (farm[x].cell === false) {
-                eating(x);
+                eating(x, foxIndex);
             }
         }
     }
