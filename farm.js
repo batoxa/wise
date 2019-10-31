@@ -51,20 +51,13 @@ function eating(x, foxIndex) {
 function hunt(foxIndex, cellAffiliation) {
     if (cellAffiliation === true) {
         for (let x = (foxIndex - 1);
-            (farm[x].type != "[") && (farm[foxIndex].type != "Y"); x--) {
-            switch (farm[x].type) {
-                case "C":
-                    farm[x].type = ".";
-                    break;
-                case "X":
-                    farm[foxIndex].type = "Y";
-            }
-        }
-        for (let x = (foxIndex + 1);
-            (farm[x].type != "]") && (farm[foxIndex].type != "."); x++) {
+            (farm[x].type != "[") && (farm[x + 1].type != "X"); x--) {
             eating(x, foxIndex);
         }
-        if (farm[foxIndex].type === "Y") { farm[foxIndex].type = "."; }
+        for (let x = (foxIndex + 1);
+            (farm[x].type != "]") && (farm[x - 1].type != "X"); x++) {
+            eating(x, foxIndex);
+        }
     } else {
         for (let x = (foxIndex - 1);
             (x > -1) && (farm[foxIndex].type != "Y"); x--) {
@@ -97,6 +90,7 @@ for (let i = 0; i < farm.length; i++) {
 for (let i = 0; i < farm.length; i++) {
     result += farm[i].type;
 }
+console.log();
 console.log(world);
 console.log(result);
 console.log();
