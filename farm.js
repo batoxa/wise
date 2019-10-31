@@ -36,6 +36,18 @@ for (let i = 0; i < world.length; i++) {
     }
 }
 
+function eating(x, foxIndex) {
+    switch (farm[x].type) {
+        case "C":
+            farm[x].type = ".";
+            break;
+        case "X":
+            farm[foxIndex].type = ".";
+    }
+    return;
+}
+
+
 function hunt(foxIndex, cellAffiliation) {
     if (cellAffiliation === true) {
         for (let x = (foxIndex - 1);
@@ -50,13 +62,7 @@ function hunt(foxIndex, cellAffiliation) {
         }
         for (let x = (foxIndex + 1);
             (farm[x].type != "]") && (farm[foxIndex].type != "."); x++) {
-            switch (farm[x].type) {
-                case "C":
-                    farm[x].type = ".";
-                    break;
-                case "X":
-                    farm[foxIndex].type = ".";
-            }
+            eating(x, foxIndex);
         }
         if (farm[foxIndex].type === "Y") { farm[foxIndex].type = "."; }
     } else {
@@ -75,13 +81,7 @@ function hunt(foxIndex, cellAffiliation) {
         for (let x = (foxIndex + 1);
             (x < farm.length) && (farm[foxIndex].type != "."); x++) {
             if (farm[x].cell === false) {
-                switch (farm[x].type) {
-                    case "C":
-                        farm[x].type = ".";
-                        break;
-                    case "X":
-                        farm[foxIndex].type = ".";
-                }
+                eating(x, foxIndex);
             }
         }
         if (farm[foxIndex].type === "Y") { farm[foxIndex].type = "."; }
