@@ -12,7 +12,7 @@
 Длинна строки не меняется, на место сожраной куры или отравившейся лисы ставим "."
 */
 
-const world = "CXC[CC]CC[CCXCF]CC[CFC]FCC";
+const world = "CFXC[CCFCXC]CC[CCXCF]CC[CFC]FCCXCXFC[CCXCFCC]";
 let result = "";
 const farm = [];
 let cell = false;
@@ -61,7 +61,7 @@ function hunt(foxIndex, cellAffiliation) {
         if (farm[foxIndex].type === "Y") { farm[foxIndex].type = "."; }
     } else {
         for (let x = (foxIndex - 1);
-            (x > 0) && (farm[foxIndex].type != "Y"); x--) {
+            (x > -1) && (farm[foxIndex].type != "Y"); x--) {
             if (farm[x].cell === false) {
                 switch (farm[x].type) {
                     case "C":
