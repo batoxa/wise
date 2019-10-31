@@ -60,24 +60,17 @@ function hunt(foxIndex, cellAffiliation) {
         }
     } else {
         for (let x = (foxIndex - 1);
-            (x > -1) && (farm[foxIndex].type != "Y"); x--) {
-            if (farm[x].cell === false) {
-                switch (farm[x].type) {
-                    case "C":
-                        farm[x].type = ".";
-                        break;
-                    case "X":
-                        farm[foxIndex].type = "Y";
-                }
-            }
-        }
-        for (let x = (foxIndex + 1);
-            (x < farm.length) && (farm[foxIndex].type != "."); x++) {
+            (x > -1) && (farm[x + 1].type != "X"); x--) {
             if (farm[x].cell === false) {
                 eating(x, foxIndex);
             }
         }
-        if (farm[foxIndex].type === "Y") { farm[foxIndex].type = "."; }
+        for (let x = (foxIndex + 1);
+            (x < farm.length) && (farm[x - 1].type != "X"); x++) {
+            if (farm[x].cell === false) {
+                eating(x, foxIndex);
+            }
+        }
     }
 }
 
