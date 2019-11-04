@@ -11,7 +11,7 @@
 Лиса может перепрыгивать клетки, но не залезает внутрь и не вылезает наружу.
 Длинна строки не меняется, на место сожраной куры или отравившейся лисы ставим "."
 */
-
+/*const world = "...CC...X...[CCC]CCC[CCCXCCCF]CCCC[CFC]FCC";*/
 const world = "CFXC[CCFCXC]CC[CCXCF]CC[CFC]FCCXCXFC[CCXCFCC]";
 let result = "";
 const farm = [];
@@ -62,15 +62,22 @@ function hunt(foxIndex, cellAffiliation) {
         for (let x = (foxIndex - 1);
             (x > -1) && (farm[x + 1].type != "X"); x--) {
             if (farm[x].cell === false) {
-                eating(x, foxIndex);
+                switch (farm[x].type) {
+                    case "C":
+                        farm[x].type = ".";
+                        break;
+                    case "X":
+                        farm[foxIndex].type = "Y";
+                }
             }
         }
         for (let x = (foxIndex + 1);
-            (x < farm.length) && (farm[x - 1].type != "X"); x++) {
+            (x < farm.length) && (farm[foxIndex].type != "."); x++) {
             if (farm[x].cell === false) {
                 eating(x, foxIndex);
             }
         }
+        if (farm[foxIndex].type === "Y") { farm[foxIndex].type = "."; }
     }
 }
 
@@ -79,10 +86,10 @@ for (let i = 0; i < farm.length; i++) {
         hunt(i, farm[i].cell);
     }
 }
-
 for (let i = 0; i < farm.length; i++) {
     result += farm[i].type;
 }
+
 console.log();
 console.log(world);
 console.log(result);
