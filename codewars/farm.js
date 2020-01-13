@@ -1,3 +1,5 @@
+// https://www.codewars.com/kata/5916c21917db4a0ad800002d
+
 const world = "CFXC[CCFCXC]CC[CCXCF]CC[CFC]FCCXCXFC[CCXCFCC]";
 let result = "";
 const farm = [];
